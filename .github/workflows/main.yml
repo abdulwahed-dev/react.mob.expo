@@ -1,0 +1,26 @@
+name: React Native Workflow
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build the app
+        run: npm start
+
+      - name: Upload the app
+        uses: actions/upload-artifact@v3
+        with:
+          name: app.apk
+          path: android/app/build/outputs/apk/release/app-release.apk
+
